@@ -10,11 +10,6 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
     
     <style>
-        /*
-        =================================
-        RESET & VARIABLE WARNA
-        =================================
-        */
         :root {
             --bg-light: #F4FBF4;
             --bg-white: #FFFFFF;
@@ -35,7 +30,6 @@
 
         html {
             scroll-behavior: smooth;
-            /* Tambahan: Agar saat klik navigasi, tidak tertutup header */
             scroll-padding-top: 80px; 
         }
 
@@ -47,12 +41,6 @@
             overflow-x: hidden;
             position: relative;
         }
-        
-        /*
-        =================================
-        PRE-LOADER & KURSOR KUSTOM
-        =================================
-        */
         .preloader {
             position: fixed;
             top: 0;
@@ -100,13 +88,6 @@
             .cursor-dot, .cursor-outline { display: none; }
             body, a, button { cursor: auto; }
         }
-
-
-        /*
-        =================================
-        NAVIGASI (Sticky Cerdas)
-        =================================
-        */
         nav {
             position: fixed;
             top: 0;
@@ -211,13 +192,6 @@
             border-radius: 3px;
             transition: all 0.3s ease;
         }
-
-
-        /*
-        =================================
-        HERO SECTION (Mouse Parallax)
-        =================================
-        */
         .hero-section {
             display: flex;
             align-items: center;
@@ -318,12 +292,6 @@
             70% { box-shadow: 0 0 0 20px rgba(0, 100, 0, 0); }
             100% { box-shadow: 0 0 0 0 rgba(0, 100, 0, 0); }
         }
-
-        /*
-        =================================
-        MARQUEE BERGERAK
-        =================================
-        */
         .marquee {
             width: 100%;
             overflow: hidden;
@@ -354,12 +322,6 @@
             0% { transform: translateX(0); }
             100% { transform: translateX(-100%); }
         }
-
-        /*
-        =================================
-        MAIN CONTAINER & ANIMASI GSAP
-        =================================
-        */
         .container {
             position: relative;
             max-width: 100%;
@@ -407,12 +369,6 @@
             max-width: 700px;
             margin: -2rem auto 3rem;
         }
-        
-        /*
-        =================================
-        PRODUCT SECTION (MODAL & SLIDER)
-        =================================
-        */
         .product-section-wrapper {
             position: relative;
             max-width: 1440px;
@@ -500,7 +456,7 @@
             transition: all 0.3s ease;
             opacity: 0;
             visibility: hidden;
-            cursor: pointer; /* Perbaikan: tambahkan cursor pointer */
+            cursor: pointer;
         }
         .product-card:hover .quick-view-btn {
             transform: translate(-50%, -50%) scale(1);
@@ -531,7 +487,7 @@
             box-shadow: 0 4px 15px rgba(0,0,0,0.1);
             z-index: 10;
             transition: all 0.3s ease;
-            cursor: pointer; /* Perbaikan: tambahkan cursor pointer */
+            cursor: pointer;
         }
         .slider-btn:hover {
             background: var(--primary-color);
@@ -543,13 +499,6 @@
         #slide-next { right: 0; }
         
         .icon { width: 22px; height: 22px; fill: currentColor; }
-
-
-        /*
-        =================================
-        MODAL "QUICK VIEW"
-        =================================
-        */
         .modal-overlay {
             position: fixed;
             top: 0;
@@ -598,7 +547,7 @@
             color: #aaa;
             z-index: 10;
             transition: all 0.3s ease;
-            cursor: pointer; /* Perbaikan: tambahkan cursor pointer */
+            cursor: pointer;
         }
         .modal-close-btn:hover {
             color: var(--text-dark);
@@ -654,12 +603,6 @@
         .instagram { background: linear-gradient(135deg, #833AB4 0%, #C13584 50%, #E1306C 100%); }
         .tiktok { background: #000000; border: 2px solid #69C9D0; }
         .whatsapp { background: linear-gradient(135deg, #25D366 0%, #20BA5A 100%); }
-
-        /*
-        =================================
-        ABOUT US (Hotspot Interaktif)
-        =================================
-        */
         .about-section {
             padding: 5rem 1.5rem;
             background: var(--bg-white);
@@ -667,7 +610,7 @@
         }
         .about-grid {
             display: grid;
-            grid-template-columns: 1fr 1fr; /* 2 kolom */
+            grid-template-columns: 1fr 1fr;
             gap: 3rem;
             align-items: center;
             max-width: 1200px;
@@ -680,7 +623,6 @@
             color: var(--text-light);
         }
         
-        /* Wrapper untuk gambar & hotspot */
         .about-interactive-wrapper {
             position: relative;
             width: 100%;
@@ -692,8 +634,8 @@
         .hotspot-image-container {
             position: relative;
             width: 100%;
-            max-width: 500px; /* Batasi lebar gambar */
-            height: 500px; /* Beri tinggi tetap */
+            max-width: 500px;
+            height: 500px;
             border-radius: 16px;
             overflow: hidden;
             box-shadow: var(--shadow-medium);
@@ -704,7 +646,6 @@
             object-fit: cover;
         }
         
-        /* Hotspot */
         .hotspot {
             position: absolute;
             z-index: 10;
@@ -718,7 +659,7 @@
             position: relative;
             cursor: pointer;
         }
-        .hotspot-dot::before { /* Animasi pulsing */
+        .hotspot-dot::before {
             content: '';
             position: absolute;
             top: 50%;
@@ -737,12 +678,11 @@
             100% { transform: translate(-50%, -50%) scale(1); opacity: 0; }
         }
         
-        /* Konten Tooltip */
         .hotspot-content {
             position: absolute;
-            bottom: 150%; /* Muncul di atas dot */
+            bottom: 150%;
             left: 50%;
-            transform: translateX(-50%) translateY(15px); /* Posisi awal */
+            transform: translateX(-50%) translateY(15px);
             background: var(--bg-white);
             padding: 1rem;
             border-radius: 8px;
@@ -752,7 +692,7 @@
             opacity: 0;
             visibility: hidden;
             transition: all 0.3s ease-out;
-            pointer-events: none; /* Biar hover tidak terganggu */
+            pointer-events: none;
         }
         .hotspot-content h3 {
             color: var(--primary-color);
@@ -765,23 +705,15 @@
             line-height: 1.6;
         }
         
-        /* Interaksi Hover */
         .hotspot:hover .hotspot-content {
             opacity: 1;
             visibility: visible;
             transform: translateX(-50%) translateY(0);
         }
         
-        /* Posisi Hotspot (Contoh) */
         .hotspot-1 { top: 35%; left: 30%; }
         .hotspot-2 { top: 50%; left: 70%; }
         .hotspot-3 { top: 75%; left: 40%; }
-        
-        /*
-        =================================
-        PROSES KAMI
-        =================================
-        */
         #proses {
             padding: 5rem 1.5rem;
             background: var(--bg-light);
@@ -835,12 +767,6 @@
             color: var(--text-light);
             line-height: 1.7;
         }
-
-        /*
-        =================================
-        TESTIMONIAL SECTION (Slider)
-        =================================
-        */
         .testimonial-section {
             padding: 5rem 0;
             background: var(--bg-white);
@@ -869,7 +795,7 @@
         @media (min-width: 768px) {
             .testimonial-grid {
                 display: flex;
-                width: calc(375px * 6); /* (350px kartu + 25px gap) * (3 kartu * 2 copy) */
+                width: calc(375px * 6);
                 animation: scroll 40s linear infinite;
                 padding: 0 1.25rem;
                 gap: 2.5rem; /* 40px */
@@ -881,10 +807,9 @@
         
         @keyframes scroll {
             0% { transform: translateX(0); }
-            100% { transform: translateX(calc(-375px * 3)); } /* (350px + 25px gap) * 3 kartu */
+            100% { transform: translateX(calc(-375px * 3)); }
         }
         
-        /* Perbaikan: Pause animasi saat di-hover (Desktop) */
         .testimonial-grid-wrapper:hover .testimonial-grid {
              animation-play-state: paused;
         }
@@ -909,12 +834,6 @@
             font-weight: 600;
             color: var(--text-dark);
         }
-
-        /*
-        =================================
-        GALERI INTERAKTIF
-        =================================
-        */
         #galeri {
             padding: 5rem 1.5rem;
         }
@@ -934,7 +853,7 @@
             font-weight: 600;
             font-size: 0.95rem;
             transition: all 0.3s ease;
-            cursor: pointer; /* Perbaikan: tambahkan cursor pointer */
+            cursor: pointer;
         }
         .filter-btn:hover {
             border-color: var(--primary-color);
@@ -959,7 +878,7 @@
             height: 300px;
             box-shadow: var(--shadow-soft);
             transition: all 0.5s ease;
-            cursor: pointer; /* Perbaikan: tambahkan cursor pointer */
+            cursor: pointer;
         }
         .gallery-item.hidden {
             transform: scale(0.8);
@@ -999,12 +918,6 @@
         .gallery-item:hover img {
             transform: scale(1.1);
         }
-
-        /*
-        =================================
-        LIGHTBOX (Modal Galeri)
-        =================================
-        */
         .lightbox-overlay {
             position: fixed;
             top: 0;
@@ -1020,7 +933,7 @@
             opacity: 0;
             visibility: hidden;
             transition: all 0.4s ease;
-            padding: 1rem; /* Perbaikan: beri padding */
+            padding: 1rem;
         }
         .lightbox-overlay.active {
             opacity: 1;
@@ -1028,10 +941,10 @@
         }
         .lightbox-content {
             position: relative;
-            width: 100%; /* Perbaikan: 100% agar pas di padding */
-            height: 100%; /* Perbaikan: 100% agar pas di padding */
+            width: 100%;
+            height: 100%;
             max-width: 1000px;
-            display: flex; /* Perbaikan: untuk centering */
+            display: flex;
             align-items: center;
             justify-content: center;
         }
@@ -1041,22 +954,22 @@
             object-fit: contain;
             transform: scale(0.9);
             transition: transform 0.4s ease;
-            max-width: 100%; /* Perbaikan */
-            max-height: 100%; /* Perbaikan */
+            max-width: 100%;
+            max-height: 100%;
         }
         .lightbox-overlay.active .lightbox-content img {
             transform: scale(1);
         }
         .lightbox-close-btn {
             position: absolute;
-            top: 1rem; /* Pindah ke dalam, 1rem dari atas */
-            right: 1rem; /* Pindah ke dalam, 1rem dari kanan */
-            width: 44px; /* Target klik yang ideal (44px) */
-            height: 44px; /* Target klik yang ideal (44px) */
-            font-size: 2rem; /* Ukuran 'x' */
-            color: #333; /* Warna gelap agar kontras */
-            background: rgba(255, 255, 255, 0.8); /* Latar belakang solid */
-            border-radius: 50%; /* Bulat */
+            top: 1rem;
+            right: 1rem;
+            width: 44px;
+            height: 44px;
+            font-size: 2rem;
+            color: #333;
+            background: rgba(255, 255, 255, 0.8);
+            border-radius: 50%;
             border: none;
             cursor: pointer;
             display: flex;
@@ -1071,12 +984,6 @@
             transform: scale(1.1);
             background: white;
         }
-        
-        /*
-        =================================
-        FAQ (Accordion) SECTION
-        =================================
-        */
         #faq {
             padding: 5rem 1.5rem;
         }
@@ -1126,13 +1033,6 @@
         .faq-item.active .faq-icon {
             transform: rotate(45deg);
         }
-
-
-        /*
-        =================================
-        MAP & CONTACT SECTION
-        =================================
-        */
         .map-section {
             padding: 4rem 1.5rem;
             text-align: center;
@@ -1211,12 +1111,6 @@
             transform: translateY(-5px);
             box-shadow: 0 12px 25px rgba(0, 100, 0, 0.5);
         }
-        
-        /*
-        =================================
-        FOOTER
-        =================================
-        */
         footer {
             text-align: left;
             padding: 5rem 2rem 2rem;
@@ -1262,12 +1156,6 @@
             border-top: 1px solid #444;
             color: #888;
         }
-        
-        /*
-        =================================
-        SCROLL TO TOP BUTTON
-        =================================
-        */
         #scrollTopBtn {
             position: fixed;
             bottom: 2rem;
@@ -1298,15 +1186,7 @@
         #scrollTopBtn:hover {
             background: var(--secondary-color);
             transform: scale(1.1);
-        }
-
-        /*
-        =================================
-        RESPONSIVE DESIGN
-        =================================
-        */
-        
-        /* Perbaikan: Aturan untuk Tablet (dan mobile) */
+        }        
         @media (max-width: 992px) {
             .nav-links { gap: 1.5rem; }
             .nav-links a { font-size: 0.9rem; }
@@ -1320,10 +1200,9 @@
                 height: auto;
             }
             .modal-flyer { flex: 1 1 50%; min-height: 250px; }
-            /* Perbaikan: Padding modal di tablet/mobile */
             .modal-details { 
                 flex: 1 1 50%; 
-                padding: 2rem; /* Mengurangi padding dari 3rem */
+                padding: 2rem;
             }
             .modal-details h2 { font-size: 2rem; }
             
@@ -1332,17 +1211,15 @@
             .hotspot-image-container { height: 600px; }
         }
         
-        /* Perbaikan: Aturan khusus Mobile */
         @media (max-width: 768px) {
-            /* Perbaikan: Sesuaikan scroll-padding untuk nav mobile */
             html {
-                scroll-padding-top: 61px; /* Tinggi nav mobile baru */
+                scroll-padding-top: 61px;
             }
             
             nav { padding: 1rem; }
             .nav-links {
                 position: fixed;
-                top: 61px; /* Sesuaikan dengan tinggi nav (1rem + 1rem + 3px) */
+                top: 61px;
                 right: -100%;
                 width: 70%;
                 height: 100vh;
@@ -1358,34 +1235,23 @@
             .nav-links a { font-size: 1.2rem; }
             .hamburger { display: flex; }
             
-            /* Perbaikan: Kurangi padding hero di mobile */
             .hero-section { padding: 7rem 1.5rem 4rem; }
-            /* Perbaikan: Kecilkan H1 di mobile */
             .hero-content h1 {
                 font-size: clamp(2rem, 8vw, 3rem);
             }
             .hero-content .subtitle {
-                font-size: 1rem; /* Kecilkan subtitle */
+                font-size: 1rem;
             }
 
-            /* Perbaikan: Kurangi padding container global di mobile */
             .container, .about-section, .contact-section, .map-section, #faq, #galeri {
                 padding: 3rem 1.5rem;
             }
             .testimonial-section {
                 padding: 3rem 0;
             }
-            
-            /*
-            =================================
-            PERBAIKAN 5 MASALAH MOBILE (BARU)
-            =================================
-            */
-
-            /* 1. PERBAIKAN JUDUL SEKSI (KERAPIHAN) */
             .section-title { 
-                font-size: clamp(1.6rem, 6vw, 2rem); /* Kecilkan font */
-                line-height: 1.3; /* Jaga kerapihan jika 2 baris */
+                font-size: clamp(1.6rem, 6vw, 2rem);
+                line-height: 1.3;
             }
             
             .section-subtitle {
@@ -1393,17 +1259,14 @@
                 margin: -1.5rem auto 2.5rem;
             }
 
-            /* Perbaikan: Sesuaikan kartu produk di mobile */
             .product-card { flex: 0 0 290px; }
             .flyer-container { height: 410px; }
             .slider-btn { display: none; }
             .product-section-wrapper { padding: 0; }
-            /* Perbaikan: Beri padding agar kartu tidak menempel di tepi */
             .products-grid { padding-left: 1.5rem; padding-right: 1.5rem; }
             
             .about-grid, .proses-grid, .gallery-grid { grid-template-columns: 1fr; }
             
-            /* 4. PERBAIKAN HOTSPOT (TENTANG KAMI) */
             .about-interactive-wrapper { 
                 min-height: 350px; 
             }
@@ -1411,23 +1274,22 @@
                 height: 350px; 
             }
             .hotspot-content {
-                width: 180px; /* Kecilkan popup */
-                top: 120%; /* Posisikan DI BAWAH dot */
-                bottom: auto; /* Hapus 'bottom' */
+                width: 180px;
+                top: 120%;
+                bottom: auto;
                 transform: translateX(-50%) translateY(0);
                 transition: all 0.3s ease-out;
             }
             .hotspot:hover .hotspot-content {
-                transform: translateX(-50%) translateY(10px); /* Animasi ke bawah */
+                transform: translateX(-50%) translateY(10px);
             }
-            /* Posisikan popup-kanan (hotspot-2) agar tidak keluar layar */
             .hotspot-2 .hotspot-content {
-                left: auto; /* Hapus left: 50% */
-                right: 0; /* Posisikan di kanan */
-                transform: translateX(0); /* Tanpa pergeseran X */
+                left: auto;
+                right: 0;
+                transform: translateX(0);
             }
             .hotspot-2:hover .hotspot-content {
-                 transform: translateY(10px); /* Animasi ke bawah */
+                 transform: translateY(10px);
             }
 
 
@@ -1441,47 +1303,43 @@
                 font-size: 1.5rem;
             }
             
-            /* 1. PERBAIKAN TESTIMONI (JADI SLIDER SWIPE) */
             .testimonial-grid { 
-                display: flex; /* 1. Ganti dari grid ke flex */
-                overflow-x: auto; /* 2. Buat bisa di-scroll horizontal */
-                scroll-snap-type: x mandatory; /* 3. Efek snap */
+                display: flex;
+                overflow-x: auto;
+                scroll-snap-type: x mandatory;
                 -webkit-overflow-scrolling: touch;
                 scrollbar-width: none;
-                width: auto; /* 4. Hapus width kalkulasi */
-                padding: 0 1.5rem; /* 5. Beri padding */
-                gap: 1.5rem; /* 6. Beri jarak antar kartu */
-                animation: none; /* 7. Animasi auto-scroll tetap mati di mobile */
+                width: auto;
+                padding: 0 1.5rem;
+                gap: 1.5rem;
+                animation: none;
             }
             .testimonial-grid::-webkit-scrollbar { display: none; }
             
             .testimonial-card {
-                flex: 0 0 80%; /* 8. Buat kartu lebih lebar, misal 80% layar */
-                max-width: 320px; /* 9. Batasi lebar maks */
-                scroll-snap-align: center; /* 10. Pusatkan kartu saat snap */
+                flex: 0 0 80%;
+                max-width: 320px;
+                scroll-snap-align: center;
             }
             
-            /* Perbaikan: Kurangi padding form kontak */
             .contact-form {
                 padding: 2rem;
             }
-            /* Perbaikan: Kecilkan font di form */
             .form-group input,
             .form-group textarea {
                 font-size: 0.95rem;
             }
             
-            /* 5. PERBAIKAN TEKS TUMPANG TINDIH (FAQ) */
             .faq-question {
                 padding: 1.25rem 1.5rem;
             }
             .faq-question h3 {
                 font-size: 1rem;
-                flex: 1; /* Izinkan teks untuk 'grow' */
-                margin-right: 1rem; /* Beri jarak dari ikon '+' */
+                flex: 1;
+                margin-right: 1rem;
             }
             .faq-icon {
-                flex-shrink: 0; /* Jaga agar ikon '+' tidak 'shrink' */
+                flex-shrink: 0;
             }
             
             .faq-answer p {
@@ -1489,48 +1347,37 @@
                 font-size: 0.95rem;
             }
             
-            /* Perbaikan: Kecilkan padding footer */
             footer {
                 padding: 4rem 1.5rem 2rem;
             }
 
-            /* 3. PERBAIKAN TOMBOL CLOSE (LIGHTBOX) */
             .lightbox-close-btn {
-                top: 1rem; /* Pindahkan ke dalam, 1rem dari atas */
-                right: 1rem; /* 1rem dari kanan */
-                width: 44px; /* Target klik 44px */
-                height: 44px; /* Target klik 44px */
-                font-size: 2rem; /* Kecilkan 'x' sedikit */
-                color: #333; /* Warna lebih kontras */
-                background: rgba(255, 255, 255, 0.8); /* Latar belakang */
+                top: 1rem;
+                right: 1rem;
+                width: 44px;
+                height: 44px;
+                font-size: 2rem;
+                color: #333;
+                background: rgba(255, 255, 255, 0.8);
                 border-radius: 50%;
-                display: flex; /* Pusatkan 'x' */
+                display: flex;
                 align-items: center;
                 justify-content: center;
-                padding: 0; /* Reset padding */
-                line-height: 1; /* Pastikan 'x' di tengah */
-                z-index: 10; /* Pastikan di atas gambar */
+                padding: 0;
+                line-height: 1;
+                z-index: 10;
             }
         }
-
-        /*
-        =================================
-        PERBAIKAN: Sub-menu Mobile Accordion
-        =================================
-        */
-
-        /* Sembunyikan ikon di desktop */
         .dropdown-icon {
             display: none;
         }
 
         @media (max-width: 768px) {
-            /* Tampilkan ikon di mobile dan beri gaya */
             .dropdown-toggle {
                 display: flex;
                 justify-content: space-between;
                 align-items: center;
-                width: 100%; /* Penting agar ikon ada di paling kanan */
+                width: 100%;
             }
             .dropdown-icon {
                 display: inline-block;
@@ -1539,31 +1386,27 @@
                 transition: transform 0.4s ease;
             }
 
-            /* GANTI ATURAN LAMA: Sembunyikan submenu */
             li.dropdown .submenu {
                 position: static;
-                display: block; /* Biarkan block, tapi kita gunakan max-height */
+                display: block;
                 width: 100%;
                 background: transparent;
                 box-shadow: none;
                 border: none;
                 opacity: 1;
                 transform: none;
-                
-                /* Ini kuncinya: sembunyikan dengan max-height */
+
                 max-height: 0;
                 overflow: hidden;
-                padding: 0 0 0 1rem; /* Hilangkan padding atas/bawah saat tertutup */
+                padding: 0 0 0 1rem;
                 transition: max-height 0.4s ease-out, padding 0.4s ease-out;
             }
 
-            /* ATURAN BARU: Saat .mobile-submenu-open aktif, tampilkan */
             li.dropdown.mobile-submenu-open .submenu {
-                max-height: 500px; /* Atur ketinggian yg cukup untuk 8 item */
-                padding: 1rem 0 0 1rem; /* Kembalikan padding atas */
+                max-height: 500px;
+                padding: 1rem 0 0 1rem;
             }
-            
-            /* ATURAN BARU: Putar ikon + menjadi x */
+
             li.dropdown.mobile-submenu-open .dropdown-icon {
                 transform: rotate(45deg);
             }
@@ -1864,18 +1707,18 @@
                 </div>
                 <div class="testimonial-card">
                     <span class="quote-icon">“</span>
-                    <p class="text">Minumannya segar sekali! Konsep 'Aksio&Tea' dari Kelompok 1 benar-benar unik. Saya suka perpaduan rasa dan edukasinya. Pasti beli lagi!</p>
-                    <p class="author">- Pelanggan A</p>
+                    <p class="text">Minumannya segar sekali! Konsep 'TeMaThe' dari Kelompok 2 benar-benar unik. Saya suka perpaduan rasa dan edukasinya. Pasti beli lagi!</p>
+                    <p class="author">- Pelanggan X</p>
                 </div>
                 <div class="testimonial-card">
                     <span class="quote-icon">“</span>
-                    <p class="text">Produk dari Kelompok 3 sangat inovatif. Kemasannya profesional dan rasanya tidak kalah dengan brand besar. Salut untuk kreativitasnya!</p>
-                    <p class="author">- Pengunjung B</p>
+                    <p class="text">Produk dari Kelompok 7 sangat inovatif. Kemasannya profesional dan rasanya tidak kalah dengan brand besar. Salut untuk kreativitasnya!</p>
+                    <p class="author">- Pengunjung Y</p>
                 </div>
                 <div class="testimonial-card">
                     <span class="quote-icon">“</span>
                     <p class="text">Saya mencoba beberapa produk, dan semuanya enak! Dukung terus mahasiswa kreatif seperti ini. Website-nya juga keren dan mudah digunakan.</p>
-                    <p class="author">- Dosen C</p>
+                    <p class="author">- Dosen Z</p>
                 </div>
             </div>
         </div>
@@ -2139,14 +1982,12 @@
 
     <script>
         document.addEventListener('DOMContentLoaded', () => {
-            
-            // --- 1. PRE-LOADER ---
+
             const preloader = document.getElementById('preloader');
             window.addEventListener('load', () => {
                 preloader.classList.add('hidden');
             });
 
-            // --- 2. KURSOR KUSTOM ---
             const cursorDot = document.querySelector('.cursor-dot');
             const cursorOutline = document.querySelector('.cursor-outline');
             if (cursorDot && window.matchMedia('(min-width: 769px)').matches) {
@@ -2160,8 +2001,7 @@
                         top: `${posY}px`
                     }, { duration: 500, fill: 'forwards' });
                 });
-                
-                // Tambahkan .hotspot-dot ke elemen interaktif
+
                 const interactiveElements = document.querySelectorAll('a, button, .product-card, .hamburger, .hotspot-dot, .filter-btn, .gallery-item, .faq-question');
                 interactiveElements.forEach(el => {
                     el.addEventListener('mouseenter', () => cursorOutline.classList.add('cursor-link-hover'));
@@ -2169,7 +2009,6 @@
                 });
             }
 
-            // --- 3. ANIMASI HERO GSAP (Stagger) ---
             const heroLines = document.querySelectorAll('.hero-line');
             const subtitle = document.querySelector('.hero-content .subtitle');
             const ctaButton = document.querySelector('.hero-content .cta-button');
@@ -2179,7 +2018,6 @@
               .to(subtitle, { y: 0, opacity: 1, duration: 1 }, '-=0.5')
               .to(ctaButton, { y: 0, opacity: 1, duration: 1 }, '-=0.7');
 
-            // --- 4. TOMBOL SLIDER PRODUK ---
             const prevBtn = document.getElementById('slide-prev');
             const nextBtn = document.getElementById('slide-next');
             const grid = document.getElementById('products-grid');
@@ -2196,7 +2034,6 @@
                 }
             }
 
-            // --- 5. MODAL "QUICK VIEW" PRODUK ---
             const modalOverlay = document.getElementById('product-modal-overlay');
             const modalCloseBtn = document.getElementById('modal-close');
             const modalImg = document.getElementById('modal-flyer-img');
@@ -2227,7 +2064,6 @@
                 if (e.target === modalOverlay) closeModal();
             });
 
-            // --- 6. NAVIGASI STICKY CERDAS ---
             const navbar = document.getElementById('navbar');
             if(navbar) {
                 window.addEventListener('scroll', () => {
@@ -2235,7 +2071,6 @@
                 });
             }
 
-            // --- 7. TOMBOL SCROLL TO TOP ---
             const scrollTopBtn = document.getElementById('scrollTopBtn');
             if(scrollTopBtn) {
                 window.addEventListener('scroll', () => {
@@ -2243,7 +2078,6 @@
                 });
             }
 
-            // --- 8. GSAP SCROLLTRIGGER (Animasi Reveal Umum) ---
             gsap.registerPlugin(ScrollTrigger);
             const revealElements = gsap.utils.toArray('.g-fade-up');
             revealElements.forEach((el) => {
@@ -2265,7 +2099,6 @@
                 );
             });
 
-            // --- 9. PARALLAX HERO BLOBS & MOUSE ---
             gsap.utils.toArray('.shape-blob').forEach(blob => {
                 gsap.to(blob, {
                     y: (i, target) => ScrollTrigger.maxScroll(window) * (target.dataset.speed || 0.5) * -1,
@@ -2299,7 +2132,6 @@
                 });
             }
 
-            // --- 10. GALERI FILTER ---
             const filterBtns = document.querySelectorAll('.filter-btn');
             const galleryItems = document.querySelectorAll('.gallery-item');
             filterBtns.forEach(btn => {
@@ -2313,7 +2145,6 @@
                 });
             });
 
-            // --- 11. LIGHTBOX GALERI ---
             const lightbox = document.getElementById('lightbox-overlay');
             const lightboxImg = document.getElementById('lightbox-img');
             const lightboxClose = document.getElementById('lightbox-close');
@@ -2335,7 +2166,6 @@
                 });
             }
 
-            // --- 12. Mobile Menu Toggle ---
             const hamburger = document.querySelector('.hamburger');
             const navLinks = document.querySelector('.nav-links');
             if(hamburger && navLinks) {
@@ -2345,46 +2175,25 @@
                 });
             }
 
-            
-            /* ===========================================
-            KODE BARU UNTUK SUBMENU MOBILE
-            ===========================================
-            */
-            // --- 13B. MOBILE SUBMENU ACCORDION ---
             const dropdownToggles = document.querySelectorAll('.dropdown-toggle');
             
             dropdownToggles.forEach(toggle => {
                 toggle.addEventListener('click', (e) => {
-                    // Cek apakah kita di tampilan mobile (lebar <= 768px)
                     if (window.innerWidth <= 768) {
-                        // 1. Hentikan link agar tidak scroll ke #products
                         e.preventDefault();
-                        
-                        // 2. Ambil parent <li> (li.dropdown)
+
                         const dropdownItem = toggle.closest('li.dropdown');
                         
-                        // 3. Toggle class-nya
                         if (dropdownItem) {
                             dropdownItem.classList.toggle('mobile-submenu-open');
                         }
                     }
-                    // Jika di desktop (lebar > 768px), biarkan link bekerja normal
-                    // (scroll ke #products) dan biarkan CSS :hover yang bekerja.
                 });
             });
-            /* ===========================================
-            AKHIR DARI KODE BARU
-            ===========================================
-            */
-            
-            
-            // --- FITUR BARU ---
-            
-            // --- 13. ANIMASI TEKS PER HURUF (GSAP) ---
             const splitTargets = gsap.utils.toArray('.g-split-chars');
             splitTargets.forEach(target => {
                 let chars = target.textContent.split('').map(char => {
-                    return char === ' ' ? ' ' : char; // Gunakan non-breaking space
+                    return char === ' ' ? ' ' : char;
                 });
                 target.innerHTML = '';
                 chars.forEach(char => {
@@ -2409,29 +2218,20 @@
                     }
                 );
             });
-            
-            // --- 14. SPOTLIGHT (DIHAPUS) ---
-            
-            // --- 15. FAQ ACCORDION ---
             const faqItems = document.querySelectorAll('.faq-item');
             faqItems.forEach(item => {
                 const question = item.querySelector('.faq-question');
                 if(question) {
                     question.addEventListener('click', () => {
                         const isActive = item.classList.contains('active');
-                        // Tutup semua item lain
                         faqItems.forEach(i => i.classList.remove('active'));
-                        // Buka/tutup item ini
                         if (!isActive) {
                             item.classList.add('active');
                         }
                     });
                 }
             });
-            
-            // --- 16. SVG PATH (DIHAPUS) ---
-
-        }); // --- Akhir dari DOMContentLoaded ---
+        });
 
     </script>
 
