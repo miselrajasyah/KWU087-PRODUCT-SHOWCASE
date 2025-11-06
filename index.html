@@ -1049,13 +1049,27 @@
         }
         .lightbox-close-btn {
             position: absolute;
-            top: -10px;
-            right: 0;
-            font-size: 3rem;
-            color: white;
-            background: transparent;
+            top: 1rem; /* Pindah ke dalam, 1rem dari atas */
+            right: 1rem; /* Pindah ke dalam, 1rem dari kanan */
+            width: 44px; /* Target klik yang ideal (44px) */
+            height: 44px; /* Target klik yang ideal (44px) */
+            font-size: 2rem; /* Ukuran 'x' */
+            color: #333; /* Warna gelap agar kontras */
+            background: rgba(255, 255, 255, 0.8); /* Latar belakang solid */
+            border-radius: 50%; /* Bulat */
             border: none;
-            cursor: pointer; /* Perbaikan: tambahkan cursor pointer */
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0;
+            line-height: 1; /* Pastikan 'x' di tengah */
+            z-index: 10; /* Pastikan di atas gambar */
+            transition: transform 0.3s ease, background-color 0.3s ease;
+        }
+        .lightbox-close-btn:hover {
+            transform: scale(1.1);
+            background: white;
         }
         
         /*
