@@ -118,7 +118,11 @@
             justify-content: space-between;
             align-items: center;
         }
-        .logo {
+        .logo img {
+            height: 40px;
+            width: auto;
+            display: block;
+        }
             font-size: 1.6rem;
             font-weight: 700;
             color: var(--primary-color);
@@ -1425,7 +1429,9 @@
 
     <nav id="navbar">
         <div class="nav-container">
-            <a href="#" class="logo">KWU087</a>
+            <a href="#" class="logo">
+            <img src="logo.png" alt="KWU087 Logo">
+            </a>
             <ul class="nav-links">
                 <li><a href="#home">Home</a></li>
                 <li class="dropdown">
