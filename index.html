@@ -678,11 +678,12 @@
             100% { transform: translate(-50%, -50%) scale(1); opacity: 0; }
         }
         
+        /* ===== PERUBAHAN HOTSPOT GLOBAL (State Sembunyi) ===== */
         .hotspot-content {
             position: absolute;
             bottom: 150%;
             left: 50%;
-            transform: translateX(-50%) translateY(15px);
+            transform: translateX(-50%) translateY(15px); /* State awal (hidden) */
             background: var(--bg-white);
             padding: 1rem;
             border-radius: 8px;
@@ -705,10 +706,13 @@
             line-height: 1.6;
         }
         
-        .hotspot:hover .hotspot-content {
+        /* ===== PERUBAHAN HOTSPOT GLOBAL (State Muncul) ===== */
+        /* Hapus :hover, ganti dengan .active untuk logika klik */
+        .hotspot.active .hotspot-content {
             opacity: 1;
             visibility: visible;
-            transform: translateX(-50%) translateY(0);
+            transform: translateX(-50%) translateY(0); /* State aktif */
+            pointer-events: auto;
         }
         
         .hotspot-1 { top: 35%; left: 30%; }
@@ -1273,24 +1277,45 @@
             .hotspot-image-container { 
                 height: 350px; 
             }
+            
+            /* ===== PERUBAHAN HOTSPOT MOBILE DIMULAI DI SINI ===== */
             .hotspot-content {
-                width: 180px;
-                top: 120%;
-                bottom: auto;
-                transform: translateX(-50%) translateY(0);
-                transition: all 0.3s ease-out;
+                width: 200px;
+                top: 120%; /* Posisikan di bawah dot */
+                bottom: auto; /* Hapus 'bottom' dari global */
+                transform: translateX(-50%) translateY(0); /* State awal (hidden) di mobile */
+                z-index: 30;
             }
+
+            /* Hapus :hover effect di mobile */
             .hotspot:hover .hotspot-content {
-                transform: translateX(-50%) translateY(10px);
+                opacity: 0;
+                visibility: hidden;
             }
-            .hotspot-2 .hotspot-content {
+
+            /* State aktif di mobile (posisi default) */
+            .hotspot.active .hotspot-content {
+                transform: translateX(-50%) translateY(10px); /* Muncul ke bawah */
+            }
+            
+            /* Aturan spesifik untuk mencegah tumpang tindih */
+            .hotspot-1.active .hotspot-content {
+                left: 0;
+                transform: translateX(0) translateY(10px);
+            }
+
+            .hotspot-2.active .hotspot-content {
                 left: auto;
                 right: 0;
-                transform: translateX(0);
+                transform: translateX(0) translateY(10px);
             }
-            .hotspot-2:hover .hotspot-content {
-                 transform: translateY(10px);
+
+            .hotspot-3.active .hotspot-content {
+                left: auto;
+                right: 0;
+                transform: translateX(0) translateY(10px);
             }
+            /* ===== PERUBAHAN HOTSPOT MOBILE BERAKHIR DI SINI ===== */
 
 
             .gallery-filters { gap: 0.5rem; }
@@ -2231,6 +2256,41 @@
                     });
                 }
             });
+
+            /* ===== KODE JS BARU UNTUK HOTSPOT KLIK (PERBAIKAN) ===== */
+            const allHotspots = document.querySelectorAll('.hotspot');
+            const hotspotDots = document.querySelectorAll('.hotspot-dot');
+
+            hotspotDots.forEach(dot => {
+                dot.addEventListener('click', (e) => {
+                    e.stopPropagation(); // Hentikan event agar tidak lgsg ditangkap document
+                    const parentHotspot = dot.closest('.hotspot');
+                    
+                    if (!parentHotspot) return; // Jaga-jaga
+
+                    // Cek apakah sudah aktif
+                    const wasActive = parentHotspot.classList.contains('active');
+
+                    // Tutup semua hotspot dulu
+                    allHotspots.forEach(h => h.classList.remove('active'));
+
+                    // Jika belum aktif, aktifkan
+                    if (!wasActive) {
+                        parentHotspot.classList.add('active');
+                    }
+                    // Jika sudah aktif, dia akan tetap tertutup (karena sdh di-remove di atas)
+                });
+            });
+
+            // Listener untuk menutup jika klik di luar
+            document.addEventListener('click', (e) => {
+                // Jika yg diklik BUKAN bagian dari .hotspot (termasuk .hotspot-content)
+                if (!e.target.closest('.hotspot')) {
+                    allHotspots.forEach(h => h.classList.remove('active'));
+                }
+            });
+            /* ===== AKHIR KODE JS BARU ===== */
+
         });
 
     </script>
