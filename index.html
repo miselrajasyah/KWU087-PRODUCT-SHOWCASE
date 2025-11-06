@@ -1344,21 +1344,6 @@
             .nav-links a { font-size: 1.2rem; }
             .hamburger { display: flex; }
             
-            /* KODE LAMA (DI GANTI OLEH KODE DI BAWAH) */
-            /*
-            li.dropdown .submenu {
-                position: static;
-                display: block;
-                width: 100%;
-                background: transparent;
-                box-shadow: none;
-                padding: 1rem 0 0 1rem;
-                opacity: 1;
-                transform: none;
-                border: none;
-            }
-            */
-            
             /* Perbaikan: Kurangi padding hero di mobile */
             .hero-section { padding: 7rem 1.5rem 4rem; }
             /* Perbaikan: Kecilkan H1 di mobile */
@@ -1377,10 +1362,18 @@
                 padding: 3rem 0;
             }
             
-            /* Perbaikan: Kecilkan judul seksi di mobile */
+            /*
+            =================================
+            PERBAIKAN 5 MASALAH MOBILE (BARU)
+            =================================
+            */
+
+            /* 1. PERBAIKAN JUDUL SEKSI (KERAPIHAN) */
             .section-title { 
-                font-size: clamp(1.8rem, 7vw, 2.2rem); 
+                font-size: clamp(1.6rem, 6vw, 2rem); /* Kecilkan font */
+                line-height: 1.3; /* Jaga kerapihan jika 2 baris */
             }
+            
             .section-subtitle {
                 font-size: 1rem;
                 margin: -1.5rem auto 2.5rem;
@@ -1396,9 +1389,33 @@
             
             .about-grid, .proses-grid, .gallery-grid { grid-template-columns: 1fr; }
             
-            /* Perbaikan: Sesuaikan tinggi gambar hotspot */
-            .about-interactive-wrapper { min-height: 320px; }
-            .hotspot-image-container { height: 320px; }
+            /* 4. PERBAIKAN HOTSPOT (TENTANG KAMI) */
+            .about-interactive-wrapper { 
+                min-height: 350px; 
+            }
+            .hotspot-image-container { 
+                height: 350px; 
+            }
+            .hotspot-content {
+                width: 180px; /* Kecilkan popup */
+                top: 120%; /* Posisikan DI BAWAH dot */
+                bottom: auto; /* Hapus 'bottom' */
+                transform: translateX(-50%) translateY(0);
+                transition: all 0.3s ease-out;
+            }
+            .hotspot:hover .hotspot-content {
+                transform: translateX(-50%) translateY(10px); /* Animasi ke bawah */
+            }
+            /* Posisikan popup-kanan (hotspot-2) agar tidak keluar layar */
+            .hotspot-2 .hotspot-content {
+                left: auto; /* Hapus left: 50% */
+                right: 0; /* Posisikan di kanan */
+                transform: translateX(0); /* Tanpa pergeseran X */
+            }
+            .hotspot-2:hover .hotspot-content {
+                 transform: translateY(10px); /* Animasi ke bawah */
+            }
+
 
             .gallery-filters { gap: 0.5rem; }
             .filter-btn { font-size: 0.85rem; padding: 0.6rem 1rem; }
@@ -1410,11 +1427,24 @@
                 font-size: 1.5rem;
             }
             
-            /* Perbaikan: Matikan animasi scroll testimoni */
+            /* 1. PERBAIKAN TESTIMONI (JADI SLIDER SWIPE) */
             .testimonial-grid { 
-                animation: none; 
-                width: auto; 
-                padding: 0 1.5rem; 
+                display: flex; /* 1. Ganti dari grid ke flex */
+                overflow-x: auto; /* 2. Buat bisa di-scroll horizontal */
+                scroll-snap-type: x mandatory; /* 3. Efek snap */
+                -webkit-overflow-scrolling: touch;
+                scrollbar-width: none;
+                width: auto; /* 4. Hapus width kalkulasi */
+                padding: 0 1.5rem; /* 5. Beri padding */
+                gap: 1.5rem; /* 6. Beri jarak antar kartu */
+                animation: none; /* 7. Animasi auto-scroll tetap mati di mobile */
+            }
+            .testimonial-grid::-webkit-scrollbar { display: none; }
+            
+            .testimonial-card {
+                flex: 0 0 80%; /* 8. Buat kartu lebih lebar, misal 80% layar */
+                max-width: 320px; /* 9. Batasi lebar maks */
+                scroll-snap-align: center; /* 10. Pusatkan kartu saat snap */
             }
             
             /* Perbaikan: Kurangi padding form kontak */
@@ -1427,13 +1457,19 @@
                 font-size: 0.95rem;
             }
             
-            /* Perbaikan: Kecilkan padding di FAQ */
+            /* 5. PERBAIKAN TEKS TUMPANG TINDIH (FAQ) */
             .faq-question {
                 padding: 1.25rem 1.5rem;
             }
             .faq-question h3 {
                 font-size: 1rem;
+                flex: 1; /* Izinkan teks untuk 'grow' */
+                margin-right: 1rem; /* Beri jarak dari ikon '+' */
             }
+            .faq-icon {
+                flex-shrink: 0; /* Jaga agar ikon '+' tidak 'shrink' */
+            }
+            
             .faq-answer p {
                 padding: 0 1.5rem 0;
                 font-size: 0.95rem;
@@ -1442,6 +1478,24 @@
             /* Perbaikan: Kecilkan padding footer */
             footer {
                 padding: 4rem 1.5rem 2rem;
+            }
+
+            /* 3. PERBAIKAN TOMBOL CLOSE (LIGHTBOX) */
+            .lightbox-close-btn {
+                top: 1rem; /* Pindahkan ke dalam, 1rem dari atas */
+                right: 1rem; /* 1rem dari kanan */
+                width: 44px; /* Target klik 44px */
+                height: 44px; /* Target klik 44px */
+                font-size: 2rem; /* Kecilkan 'x' sedikit */
+                color: #333; /* Warna lebih kontras */
+                background: rgba(255, 255, 255, 0.8); /* Latar belakang */
+                border-radius: 50%;
+                display: flex; /* Pusatkan 'x' */
+                align-items: center;
+                justify-content: center;
+                padding: 0; /* Reset padding */
+                line-height: 1; /* Pastikan 'x' di tengah */
+                z-index: 10; /* Pastikan di atas gambar */
             }
         }
 
